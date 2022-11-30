@@ -20,19 +20,15 @@ class MapcolumnsCommand(BaseCommand):
 
         mapping_df = self.get_arg("mapping_df").value
 
-        source = self.get_arg('source').value
-        if source is None:
-            source = 'metric_name'
+        source = self.get_arg('source').value or 'metric_name'
 
-        target = self.get_arg('target').value
-        if target is None:
-            target = 'metric_long_name'
+        target = self.get_arg('target').value or 'metric_long_name'
 
         try:
             mapping_dict = dict(zip(mapping_df[source], mapping_df[target]))
             df = df.rename(columns=mapping_dict)
         except KeyError:
-            self.log_progress('Given columns names {first} or {second} are not in the subsearch results!'
+            self.logger.error('Given columns names {first} or {second} are not in the subsearch results!'
                               .format(first=source, second=target))
 
         print(df)
