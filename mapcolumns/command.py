@@ -19,11 +19,9 @@ class MapcolumnsCommand(BaseCommand):
         self.log_progress('Start mapcolumns command')
 
         mapping_df = self.get_arg("mapping_df").value
-
         source = self.get_arg('source').value or 'metric_name'
 
         target = self.get_arg('target').value or 'metric_long_name'
-
         try:
             mapping_dict = dict(zip(mapping_df[source], mapping_df[target]))
             df = df.rename(columns=mapping_dict)
@@ -31,6 +29,5 @@ class MapcolumnsCommand(BaseCommand):
             self.logger.error('Given columns names {first} or {second} are not in the subsearch results!'
                               .format(first=source, second=target))
 
-        print(df)
         self.log_progress('End mapcolumns command')
         return df
