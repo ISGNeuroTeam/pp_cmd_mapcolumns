@@ -91,3 +91,5 @@ query: | otl_v1 <# makeresults count=100 #> |  mapcolumns
 ```
 ## Deploy
 Unpack archive `pp_cmd_mapcolumns` to postprocessing commands directory
+## Test
+Use `make test` and all test will run in Docker container. Please turn the vpn on so all the OTL dependencies would download.
